@@ -47,7 +47,7 @@ for message in st.session_state.chat_session.history:
         st.markdown(message.parts[0].text)
 
 # 7. 채팅 입력창 (사용자 맞춤형 예시 텍스트 포함)
-prompt = st.chat_input("예: 주말 12시간 고강도 알바 후 하체 훈련을 앞두고 있는데, 피로도가 높고 의욕이 떨어집니다.")
+prompt = st.chat_input("예: 요즘 해야 할 일에 집중하지 못하고, 피로도가 높고 의욕이 떨어집니다.")
 
 # 8. 사용자 입력 처리 및 AI 답변 스트리밍 출력
 if prompt:
