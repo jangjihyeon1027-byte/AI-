@@ -44,12 +44,15 @@ if prompt:
     with st.chat_message("user"):
         st.markdown(prompt)
         
-    # AI가 생각하는 동안 빙글빙글 도는 로딩 애니메이션 표시
+   # AI가 생각하는 동안 빙글빙글 도는 로딩 애니메이션 표시
     with st.chat_message("assistant"):
         with st.spinner("호르몬 상태와 솔루션을 분석 중입니다..."):
             try:
-                # 제미나이에게 메시지 보내고 답변 받기
-                response = st.session_state.chat_session.send_message(prompt)
-                st.markdown(response.text)
+                # 1. 스트리밍 옵션을 켜서 메시지 보내기
+                response = st.session_state.chat_session.send_message(prompt, stream=True)
+                
+                # 2. st.write_stream() 함수를 사용해 글자가 타자 치듯 나오게 만들기
+                st.write_stream(response)
+                
             except Exception as e:
                 st.error(f"오류가 발생했습니다: {e}")
