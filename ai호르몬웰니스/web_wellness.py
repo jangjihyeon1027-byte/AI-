@@ -65,4 +65,8 @@ if prompt:
                 # 포장지(chunk)를 열어 알맹이(text)만 타자기처럼 출력
                 st.write_stream(chunk.text for chunk in response)
             except Exception as e:
-                st.error(f"오류가 발생했습니다: {e}")
+                # 에러 메시지에 429나 quota라는 단어가 포함되어 있다면
+                if "429" in str(e) or "quota" in str(e).lower():
+                    st.warning("⏳ 구글 API 무료 제한(1분당 최대 5회)을 초과했습니다. 약 1분만 기다렸다가 다시 질문해 주세요!")
+                else:
+                    st.error(f"오류가 발생했습니다: {e}")
